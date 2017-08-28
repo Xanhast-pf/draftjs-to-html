@@ -349,19 +349,9 @@ function getEntityMarkup(
         return `<a href="${entity.data.url}" target="${target}">${text}</a>`;
     }
     if (entity.type === "IMAGE") {
-        const height =
-            entity.data.height === "auto" || entity.data.height.search("px") !== -1
-                ? entity.data.height
-                : entity.data.height + "px";
-
-        const width =
-            entity.data.width === "auto"  || entity.data.width.search("px") !== -1
-                ? entity.data.width + "px"
-                : entity.data.width;
-
         return `<img src="${entity.data.src}" alt="${entity.data
             .alt}" style="float:${entity.data.alignment ||
-            "none"};height: ${height};width: ${width}"/>`;
+            "none"};" height="${entity.data.height} width="${entity.data.width}"/>`;
     }
     if (entity.type === "EMBEDDED_LINK") {
         return `<iframe width="${entity.data.width}" height="${entity.data
