@@ -350,15 +350,15 @@ function getEntityMarkup(
     }
     if (entity.type === "IMAGE") {
         const height =
-            entity.data.height === "auto" || entity.data.height.includes("px")
+            entity.data.height === "auto" || entity.data.height.search("px") !== -1
                 ? entity.data.height
                 : entity.data.height + "px";
 
         const width =
-            entity.data.width === "auto"  || entity.data.width.includes("px")
+            entity.data.width === "auto"  || entity.data.width.search("px") !== -1
                 ? entity.data.width + "px"
                 : entity.data.width;
-                
+
         return `<img src="${entity.data.src}" alt="${entity.data
             .alt}" style="float:${entity.data.alignment ||
             "none"};height: ${height};width: ${width}"/>`;
