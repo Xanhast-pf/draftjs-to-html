@@ -1,7 +1,7 @@
-require('babel-core/register');
+require("babel-core/register");
 function noop() {
-  return null;
+    return null;
 }
-require.extensions['.css'] = noop;
-require.extensions['.svg'] = noop;
-require.extensions['.png'] = noop;
+require.extensions[".css"] = noop;
+require.extensions[".svg"] = noop;
+require.extensions[".png"] = noop;

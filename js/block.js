@@ -349,6 +349,7 @@ function getEntityMarkup(
         return `<a href="${entity.data.url}" target="${target}">${text}</a>`;
     }
     if (entity.type === "IMAGE") {
+        console.log("WUT entity: ", entity);
         return `<img src="${entity.data.src}" alt="${entity.data
             .alt}" style="float:${entity.data.alignment ||
             "none"};" height="${entity.data.height}" width="${entity.data

@@ -1,3 +1,3 @@
-function describe() {};
-function it() {};
-function beforeEach() {};
+function describe() {}
+function it() {}
+function beforeEach() {}
