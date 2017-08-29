@@ -344,10 +344,10 @@ const parseDim = (dim: string): string => {
 };
 
 const align = (alignment: "none" | "right" | "left") => {
-    if (!alignment || alignment === "none") return `style="margin:auto;"`;
+    if (!alignment || alignment === "none") return `style="text-align:center;"`;
     if (alignment === "right")
-        return `style="margin-right:0; margin-left:auto;"`;
-    return "";
+        return `style="text-align: right;"`;
+    return `style="text-align: left;"`;
 };
 
 function getEntityMarkup(
