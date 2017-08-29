@@ -326,13 +326,37 @@ export function addStylePropertyMarkup(styles: Object, text: string): string {
 /**
 * Function will return markup for Entity.
 */
+interface Entity {
+    type: "MENTION" | "LINK" | "IMAGE" | "EMBEDDED_LINK",
+    mutability: string,
+    data?: {
+        src?: string,
+        height?: string,
+        width?: string,
+        alignment?: "left" | "right" | "none"
+    }
+}
+
+const parseDim = (dim: string): string => {
+    if (dim === "auto") return "auto";
+    if (dim.includes("px")) return dim;
+    return dim + "px";
+};
+
+const align = (alignment: "none" | "right" | "left") => {
+    if (!alignment || alignment === "none") return `style="margin:auto;"`;
+    if (alignment === "right")
+        return `style="margin-right:0; margin-left:auto;"`;
+    return "";
+};
+
 function getEntityMarkup(
     entityMap: Object,
     entityKey: number,
     text: string,
     customEntityTransform: Function
 ): string {
-    const entity = entityMap[entityKey];
+    const entity: Entity = entityMap[entityKey];
     if (typeof customEntityTransform === "function") {
         const html = customEntityTransform(entity, text);
         if (html) {
@@ -349,10 +373,10 @@ function getEntityMarkup(
         return `<a href="${entity.data.url}" target="${target}">${text}</a>`;
     }
     if (entity.type === "IMAGE") {
-        return `<div><img src="${entity.data.src}" alt="${entity.data
-            .alt}" style="float:${entity.data.alignment ||
-            "none"};" height="${entity.data.height}" width="${entity.data
-            .width}" /><p>${JSON.stringify(entity)}</p></div>`;
+        return `<div ${align(entity.data.alignment)}><img src="${entity.data
+            .src}" alt="${entity.data.alt}" style="width:${parseDim(
+            entity.data.width
+        )}; height:${parseDim(entity.data.height)};"/></div>`;
     }
     if (entity.type === "EMBEDDED_LINK") {
         return `<iframe width="${entity.data.width}" height="${entity.data
